@@ -1,0 +1,53 @@
+<!DOCTYPE>
+<html ng-app>
+
+<head>
+	<script type="text/javascript" src="angularjs/angular.js"></script>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<title>Gestion des evenements</title>
+</head>
+<body>
+	<div class="container" ng-controller="AppCtrl">
+		<h1>Gestion des evenements</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Description</th>
+					<th>Date</th>
+					<th>Logo</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+
+					<td><input class="form-control" ng-model="evenement.titre"></td>
+					<td><input class="form-control" ng-model="evenement.description"></td>
+					<td><input class="form-control" ng-model="evenement.date"></td>
+					
+					<td><button class="btn btn-primary" ng-click="addEvenement()">Add evenement</button></td>
+					<td><button class="btn btn-info" ng-click="update()">Update</button></td>
+					<td>{{ evenement }}</td>
+
+				</tr>
+
+				<tr ng-repeat="evenement in evenementlist">
+					<td>{{evenement.titre}}</td>
+					<td>{{evenement.description}}</td>
+					<td>{{evenement.date}}</td>
+					<td><button class="btn btn-danger" ng-click="removeEvenement(evenement._id)">Remove</button></td>
+					<td><button class="btn btn-warning" ng-click="editEvenement(evenement._id)">Edit</button></td>
+				</tr>
+			</tbody>
+		<table>
+	</div>
+
+<script src="controllers/controller.js"></script>
+</body>
+</html>
