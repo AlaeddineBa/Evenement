@@ -1,0 +1,51 @@
+.logo{
+	width: 50px;
+	height: 50px;
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.chosed-logo{
+	width: 70px;
+	height: 70px;
+}
+
+.add-form{
+	margin-top: 0px;
+}
+
+/*----------------*\
+ *  Input Style   *
+\*----------------*/
+.inputfile {
+	background: red;
+	height: 70px;
+	width: 70px;
+	opacity: 0;
+	position: absolute;
+	cursor: pointer;
+	z-index: 9999999;
+}
+
+.logo-label {
+	border-radius: 50%;
+	text-align: center;
+	width: 70px;
+	height: 70px;
+	color: #fff;
+	z-index: 9;
+}
+.logo-label i{margin-top: 5px;}
+
+.events-list .event{
+	border-bottom: 1px solid #dddddd;
+}
+
+.event-title{
+	font-size: 20px; 
+	font-weight: bolder;
+}
+
+.event-more{
+	text-align: center;
+}

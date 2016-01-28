@@ -1,52 +1,120 @@
 <!DOCTYPE>
-<html ng-app>
+<html ng-app="app">
 
 <head>
-	<script type="text/javascript" src="angularjs/angular.js"></script>
 	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css">
+
+	<link rel="stylesheet" href="css/bootstrap-material-design.min.css">
+	<link rel="stylesheet" href="css/ripples.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script type="text/javascript" src="angularjs/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script type="text/javascript" src="js/angular-base64-upload.min.js"></script>
+	<script type="text/javascript" src="js/material.min.js"></script>
+	<script type="text/javascript" src="js/ripples.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js"></script>
+
 	<title>Gestion des evenements</title>
+
+	<script>
+		$(document).ready(function() {
+			$.material.init();
+			$('.datepicker').datepicker();
+		});
+	</script>
 </head>
 <body>
 	<div class="container" ng-controller="AppCtrl">
 		<h1>Gestion des evenements</h1>
 
 		<table class="table">
-			<thead>
-				<tr>
-					<th>Titre</th>
-					<th>Description</th>
-					<th>Date</th>
-					<th>Logo</th>
-					<th>&nbsp;</th>
-				</tr>
-			</thead>
 			<tbody>
 				<tr>
-
-					<td><input class="form-control" ng-model="evenement.titre"></td>
-					<td><input class="form-control" ng-model="evenement.description"></td>
-					<td><input class="form-control" ng-model="evenement.date"></td>
-					
-					<td><button class="btn btn-primary" ng-click="addEvenement()">Add evenement</button></td>
-					<td><button class="btn btn-info" ng-click="update()">Update</button></td>
-					<td>{{ evenement }}</td>
-
-				</tr>
-
-				<tr ng-repeat="evenement in evenementlist">
-					<td>{{evenement.titre}}</td>
-					<td>{{evenement.description}}</td>
-					<td>{{evenement.date}}</td>
-					<td><button class="btn btn-danger" ng-click="removeEvenement(evenement._id)">Remove</button></td>
-					<td><button class="btn btn-warning" ng-click="editEvenement(evenement._id)">Edit</button></td>
+					<td>
+						<div class="form-group add-form">
+						  <label class="control-label" >Titre</label>
+						  <input class="form-control" ng-model="event.title" type="text">
+						</div>
+					</td>
+					<td>
+						<div class="form-group add-form">
+						  <label class="control-label" >Descriptions</label>
+						  <input class="form-control" ng-model="event.desc" type="text">
+						</div>
+					</td>
+					<td>
+						<div class="form-group add-form">
+						  <label class="control-label" >Date</label>
+						  <input class="form-control datepicker" ng-model="event.date" type="text">
+						</div>
+					</td>
+					<td>
+						<div class="form-group add-form">
+						  <label class="control-label" >Type</label>
+						  <input class="form-control" ng-model="event.type" type="text">
+						</div>
+					</td>
+					<td class="logo-input">
+						<input type="file" ng-model="myfile" onload="onLoad"  accept="image/*" class="inputfile" base-sixty-four-input>
+						<label class="logo-label" for="file">
+							<img class="logo chosed-logo" ng-src="{{logoPick}}" alt="">
+						</label>
+					</td>
+					<td>
+						<button class="btn btn-raised btn-primary" ng-click="addEvent(event)">Add evenement</button>
+					</td>
+					<td>
+						<button class="btn btn-raised btn-info" ng-click="updateEvent(event)">Update</button>
+					</td>
 				</tr>
 			</tbody>
-		<table>
-	</div>
+		</table>
+
+		<div class="form-group has-feedback">
+	    <input type="text" class="form-control" ng-model="query" placeholder="Rechercher un evenement" />
+	    <i class="glyphicon glyphicon-search form-control-feedback"></i>
+		</div>
+
+			<div class="events-list">
+
+				<div class="event animated fadeInUp" ng-repeat="evenement in evenementlist | filter:query">
+					<img class="logo" ng-src="data:image/png;base64,{{evenement.base64}}" alt="">
+					
+					<span class="btn event-title" ng-click="opened = !opened">{{evenement.title}}</span>
+					
+					<div class="event-more animated fadeInLeft" ng-if="opened">
+						<div class="event-type">
+							<h4>{{evenement.type}}</h4>
+						</div>
+						<div class="event-date">
+							Le {{evenement.date}}
+						</div>
+						<div class="event-desc">
+							{{evenement.desc}}
+						</div>
+						
+						<div class="event-actions">
+							<button class="btn btn-raised btn-danger" ng-click="removeEvenet(evenement._id)">
+								<i class="fa fa-trash-o"></i>
+							</button>
+
+							<button class="btn btn-raised btn-warning" ng-click="editEvent(evenement)">
+								<i class="fa fa-pencil"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</div> <!-- events-list -->
+			
+	</div> <!-- container -->
 
 <script src="controllers/controller.js"></script>
 </body>
