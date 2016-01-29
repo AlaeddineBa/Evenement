@@ -2,15 +2,22 @@
 var app = angular.module('app',['naif.base64']); 
 
 app.controller('AppCtrl',function($scope, $http){
+	$('.datepicker').datepicker({
+    			language: "fr",
+    			autoclose: true
+			});
+	$('.datepicker').on('changeDate', function() {
+    $scope.event.date = $('.datepicker').val();
+  });
 
 	$scope.logoPick = 'css/img/pic.png';
 	$scope.evenementlist = [];
 	$scope.event = {};
 	$scope.pick = '';
 
-	$scope.query = '';
-
 	$scope.opened = false;
+
+
 
 	var refresh = function(){
 		$http.get('/getEventList')

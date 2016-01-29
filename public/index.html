@@ -26,7 +26,7 @@
 	<script>
 		$(document).ready(function() {
 			$.material.init();
-			$('.datepicker').datepicker();
+			
 		});
 	</script>
 </head>
@@ -50,7 +50,7 @@
 						</div>
 					</td>
 					<td>
-						<div class="form-group add-form">
+						<div class="form-group add-form input-append date">
 						  <label class="control-label" >Date</label>
 						  <input class="form-control datepicker" ng-model="event.date" type="text">
 						</div>
@@ -58,7 +58,8 @@
 					<td>
 						<div class="form-group add-form">
 						  <label class="control-label" >Type</label>
-						  <input class="form-control" ng-model="event.type" type="text">
+						  <input class="form-control" ng-model="event.type" type="text"> 
+					
 						</div>
 					</td>
 					<td class="logo-input">
@@ -82,12 +83,15 @@
 	    <i class="glyphicon glyphicon-search form-control-feedback"></i>
 		</div>
 
-			<div class="events-list">
+			<div class="events-list" ng-controller="MainCtrl">
 
-				<div class="event animated fadeInUp" ng-repeat="evenement in evenementlist | filter:query">
+				<div class="event animated fadeInUp" ng-repeat="evenement in evenementlist | orderBy:'-date'">
+
 					<img class="logo" ng-src="data:image/png;base64,{{evenement.base64}}" alt="">
 					
 					<span class="btn event-title" ng-click="opened = !opened">{{evenement.title}}</span>
+
+					 
 					
 					<div class="event-more animated fadeInLeft" ng-if="opened">
 						<div class="event-type">
@@ -101,7 +105,7 @@
 						</div>
 						
 						<div class="event-actions">
-							<button class="btn btn-raised btn-danger" ng-click="removeEvenet(evenement._id)">
+							<button class="btn btn-raised btn-danger" ng-click="removeEvent(evenement._id)">
 								<i class="fa fa-trash-o"></i>
 							</button>
 
@@ -117,5 +121,6 @@
 	</div> <!-- container -->
 
 <script src="controllers/controller.js"></script>
+<script src="controllers/controllers1.js"></script>
 </body>
 </html>
