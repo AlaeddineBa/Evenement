@@ -69,7 +69,7 @@
 						</label>
 					</td>
 					<td>
-						<button class="btn btn-raised btn-primary" ng-click="addEvent(event)">Add evenement</button>
+						<button class="btn btn-raised btn-primary" ng-click="addEvent(event)">Add Event</button>
 					</td>
 					<td>
 						<button class="btn btn-raised btn-info" ng-click="updateEvent(event)">Update</button>
@@ -83,7 +83,7 @@
 	    <i class="glyphicon glyphicon-search form-control-feedback"></i>
 		</div>
 
-			<div class="events-list" ng-controller="MainCtrl">
+			<div class="events-list" >
 
 				<div class="event animated fadeInUp" ng-repeat="evenement in evenementlist | orderBy:'-date'">
 
@@ -121,6 +121,5 @@
 	</div> <!-- container -->
 
 <script src="controllers/controller.js"></script>
-<script src="controllers/controllers1.js"></script>
 </body>
 </html>
