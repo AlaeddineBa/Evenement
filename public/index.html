@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/css/bootstrap-datepicker.min.css">
 
 	<link rel="stylesheet" href="css/bootstrap-material-design.min.css">
-	<link rel="stylesheet" href="css/ripples.min.css">
+	<!--<link rel="stylesheet" href="css/ripples.min.css">-->
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/style.css">
 	
@@ -85,7 +85,7 @@
 
 			<div class="events-list" >
 
-				<div class="event animated fadeInUp" ng-repeat="evenement in evenementlist | orderBy:'-date'">
+				<div class="event animated fadeInUp" ng-repeat="evenement in evenementlist | orderBy:'-date' | filter:query">
 
 					<img class="logo" ng-src="data:image/png;base64,{{evenement.base64}}" alt="">
 					

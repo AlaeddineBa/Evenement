@@ -15,6 +15,8 @@ app.controller('AppCtrl',function($scope, $http){
 	$scope.event = {};
 	$scope.pick = '';
 
+	$scope.query = '';
+
 	$scope.opened = false;
 
 
@@ -64,7 +66,7 @@ app.controller('AppCtrl',function($scope, $http){
 	  ;
 	};
 
-	$scope.removeEvent = function(id,index) {
+	$scope.removeEvent = function(id) {
 		$http.delete('/delEventList/' +id).success(function(response){
 			refresh();
 		});
